@@ -1,4 +1,3 @@
-from datetime import time, timedelta
 from essentia import standard as es
 from statistics import median, mean
 from gdown import download_folder
@@ -12,6 +11,7 @@ from requests import get
 from pickle import load
 import tensorflow as tf
 import streamlit as st
+import datetime as dt
 import librosa
 import numpy
 import math
@@ -166,11 +166,11 @@ if st.text_input('Your Name', key='Your Name'):
     with st.popover('Search Option'):
         i = st.multiselect('Ignore Artist', ('ANDY', 'BGMer', 'Nash Music Library', 'Seiko', 'TAZ', 'hitoshi', 'zukisuzuki', 'たう', 'ガレトコ', 'ユーフルカ'), key='Ignore Artist', placeholder='')
         j = st.multiselect('Ignore Site', ('BGMer', 'BGMusic', 'Nash Music Library', 'PeriTune', 'Senses Circuit', 'zukisuzuki BGM', 'ガレトコ', 'ユーフルカ', '音の園'), key='Ignore Site', placeholder='')
-        t = st.slider('Time Range', time(0), time(1), (time(0), time(1)), timedelta(seconds=10), 'mm:ss', key='Time Range')
+        t = st.slider('Time Range', dt.time(0), dt.time(1), (dt.time(0), dt.time(1)), dt.timedelta(seconds=10), 'mm:ss', key='Time Range')
         r = st.slider('Random Rate', 0.0, 1.0, 1.0, key='Random Rate')
     if st.button(f'Search {"EgGMAn" if y.size else "Random"}', type='primary'):
         try:
-            print(f'EgGMAn {st.session_state}')
+            print(f'[eggman] {st.session_state} [{dt.datatime.now()}]')
             if y.size:
                 p, q = T[p & ~q], T[q & ~p]
                 z = a * vec(y, r) - b - core(p['vec']) + core(q['vec'])
