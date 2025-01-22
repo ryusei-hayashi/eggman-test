@@ -166,7 +166,7 @@ if st.text_input('Your Name', key='Your_Name):
     with st.popover('Search Option'):
         i = st.multiselect('Ignore Artist', ('ANDY', 'BGMer', 'Nash Music Library', 'Seiko', 'TAZ', 'hitoshi', 'zukisuzuki', 'たう', 'ガレトコ', 'ユーフルカ'), key='Ignore_Artist', placeholder='')
         j = st.multiselect('Ignore Site', ('BGMer', 'BGMusic', 'Nash Music Library', 'PeriTune', 'Senses Circuit', 'zukisuzuki BGM', 'ガレトコ', 'ユーフルカ', '音の園'), key='Ignore_Site', placeholder='')
-        t = st.slider('Time Range', dt.time(0), dt.time(1), (dt.time(0), dt.time(1)), dt.timedelta(seconds=10), 'mm:ss', 'Time_Range')
+        t = st.slider('Time Range', dt.time(0), dt.time(1), (dt.time(0), dt.time(1)), dt.timedelta(seconds=10), 'mm:ss', key='Time_Range')
         r = st.slider('Random Rate', 0.0, 1.0, 1.0, key='Random_Rate')
     if st.button(f'Search {"EgGMAn" if y.size else "Random"}', type='primary'):
         try:
