@@ -150,7 +150,7 @@ bin = 1025
 M = model('data/model.pkl')
 T, a, b = table('data/table.pkl')
 
-if st.text_input('Your Name', key='Your_Name):
+if st.text_input('Your Name', key='Your_Name'):
     st.image('imgs/logo.png')
     st.markdown('EgGMAn (Engine of Game Music Analogy) search for game music considering game and scene feature at the same time')
     
