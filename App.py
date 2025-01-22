@@ -19,6 +19,8 @@ import math
 st.set_page_config('EgGMAn', ':musical_note:', 'wide')
 st.sidebar.link_button('Contact Us', 'https://forms.gle/A4vWuEAp4pPEY4sf9', use_container_width=True)
 
+st.sidebar.download_button('log', open('log.txt', 'r'), 'log.txt')
+
 if not exists('data'):
     download_folder('https://drive.google.com/drive/folders/1vjKbuINZh1a03lFPYWQdyMtYrQrJcFLS')
 
@@ -170,7 +172,7 @@ if st.text_input('Your Name', key='Your Name'):
         r = st.slider('Random Rate', 0.0, 1.0, 1.0, key='Random Rate')
     if st.button(f'Search {"EgGMAn" if y.size else "Random"}', type='primary'):
         try:
-            print(f'[eggman] {st.session_state} [{dt.datetime.now()}]')
+            open('log.txt', 'a').write(f'[eggman] {st.session_state} [{dt.datetime.now()}]\n')
             if y.size:
                 p, q = T[p & ~q], T[q & ~p]
                 z = a * vec(y, r) - b - core(p['vec']) + core(q['vec'])
