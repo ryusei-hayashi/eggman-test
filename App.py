@@ -19,8 +19,6 @@ import math
 st.set_page_config('EgGMAn', ':musical_note:', 'wide')
 st.sidebar.link_button('Contact Us', 'https://forms.gle/A4vWuEAp4pPEY4sf9', use_container_width=True)
 
-st.sidebar.download_button('log', open('log.txt', 'r'), 'log.txt')
-
 if not exists('data'):
     download_folder('https://drive.google.com/drive/folders/1vjKbuINZh1a03lFPYWQdyMtYrQrJcFLS')
 
