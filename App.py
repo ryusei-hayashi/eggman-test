@@ -153,7 +153,7 @@ M = model('data/model.pkl')
 T, a, b = table('data/table.pkl')
 
 n = st.text_input('Your Name', key='Your Name')
-if n == st.secret['pw']:
+if n == st.secrets['pw']:
     st.download_button('Download', open('log.txt', 'r'))
 elif n:
     st.image('imgs/logo.png')
