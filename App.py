@@ -170,6 +170,7 @@ if st.text_input('Your Name', key='Your Name'):
         r = st.slider('Random Rate', 0.0, 1.0, 1.0, key='Random Rate')
     if st.button(f'Search {"EgGMAn" if y.size else "Random"}', type='primary'):
         try:
+            print(f'EgGMAn {st.session_state}')
             if y.size:
                 p, q = T[p & ~q], T[q & ~p]
                 z = a * vec(y, r) - b - core(p['vec']) + core(q['vec'])
@@ -178,6 +179,5 @@ if st.text_input('Your Name', key='Your Name'):
                 z = normal(q['vec'].mean(), r * numpy.stack(q['vec']).std(0))
             o = q[~q['Artist'].isin(i) & ~q['Site'].isin(j) & q['Time'].between(t[0], t[1])] 
             st.dataframe(o.iloc[norm(numpy.stack(o['vec']) - z, axis=1).argsort()[:99], :5].reset_index(drop=True), column_config={'URL': st.column_config.LinkColumn(), 'Time': st.column_config.TimeColumn(format='mm:ss')})
-            print(f'EgGMAn {st.session_state}')
         except:
             st.error('No music matches the conditions')
