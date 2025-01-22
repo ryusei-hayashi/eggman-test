@@ -170,7 +170,7 @@ if st.text_input('Your Name', key='Your Name'):
         r = st.slider('Random Rate', 0.0, 1.0, 1.0, key='Random Rate')
     if st.button(f'Search {"EgGMAn" if y.size else "Random"}', type='primary'):
         try:
-            print(f'[eggman] {st.session_state} [{dt.datatime.now()}]')
+            print(f'[eggman] {st.session_state} [{dt.datetime.now()}]')
             if y.size:
                 p, q = T[p & ~q], T[q & ~p]
                 z = a * vec(y, r) - b - core(p['vec']) + core(q['vec'])
