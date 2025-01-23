@@ -151,11 +151,12 @@ M = model('data/model.pkl')
 T, a, b = table('data/table.pkl')
 
 n = st.text_input('Your Name', key='Your Name')
+
 if n == st.secrets.pw:
-    st.download_button('Download', open('log.txt', 'r'))
-elif n:
+    st.download_button('Download', open('status.txt', 'r'))
+
+if n:
     st.image('imgs/logo.png')
-    st.markdown('EgGMAn (Engine of Game Music Analogy) search for game music considering game and scene feature at the same time')
     
     st.header('Source Music')
     s = st.segmented_control('Type of Source Music', ('Web Service', 'Direct Link', 'Audio File'), default='Web Service', key='Type of Source Music')
@@ -173,7 +174,6 @@ elif n:
         r = st.slider('Random Rate', 0.0, 1.0, 1.0, key='Random Rate')
     if st.button(f'Search {"EgGMAn" if y.size else "Random"}', type='primary'):
         try:
-            open('log.txt', 'a').write(f'[eggman] {st.session_state} [{dt.datetime.now()}]\n')
             if y.size:
                 p, q = T[p & ~q], T[q & ~p]
                 z = a * vec(y, r) - b - core(p['vec']) + core(q['vec'])
@@ -182,5 +182,6 @@ elif n:
                 z = normal(q['vec'].mean(), r * numpy.stack(q['vec']).std(0))
             o = q[~q['Artist'].isin(i) & ~q['Site'].isin(j) & q['Time'].between(t[0], t[1])] 
             st.dataframe(o.iloc[norm(numpy.stack(o['vec']) - z, axis=1).argsort()[:99], :5].reset_index(drop=True), column_config={'URL': st.column_config.LinkColumn(), 'Time': st.column_config.TimeColumn(format='mm:ss')})
+            open('status.txt', 'a').write(f'{st.session_state}\n')
         except:
             st.error('No music matches the conditions')
