@@ -82,7 +82,7 @@ def table(n):
     b = a * numpy.stack(t['vec']).min(0) + 100
     return t, a, b
 
-@st.cache_data(ttl='9m')
+@st.cache_data(max_entries=1)
 def music(t, m):
     if m:
         try:
