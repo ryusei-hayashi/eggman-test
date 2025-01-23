@@ -168,8 +168,8 @@ if n:
     
     st.header('Target Music')
     with st.popover('Search Option'):
-        i = st.multiselect('Ignore Artist', ('ANDY', 'BGMer', 'Nash Music Library', 'Seiko', 'TAZ', 'hitoshi', 'zukisuzuki', 'たう', 'ガレトコ', 'ユーフルカ'), key='Ignore Artist', placeholder='')
-        j = st.multiselect('Ignore Site', ('BGMer', 'BGMusic', 'Nash Music Library', 'PeriTune', 'Senses Circuit', 'zukisuzuki BGM', 'ガレトコ', 'ユーフルカ', '音の園'), key='Ignore Site', placeholder='')
+        i = st.multiselect('Ignore Artist', ('OO Artist', 'ANDY', 'BGMer', 'Nash Music Library', 'Seiko', 'TAZ', 'hitoshi', 'zukisuzuki', 'たう', 'ガレトコ', 'ユーフルカ'), key='Ignore Artist', placeholder='')
+        j = st.multiselect('Ignore Site', ('OO Site', 'BGMer', 'BGMusic', 'Nash Music Library', 'PeriTune', 'Senses Circuit', 'zukisuzuki BGM', 'ガレトコ', 'ユーフルカ', '音の園'), key='Ignore Site', placeholder='')
         t = st.slider('Time Range', dt.time(0), dt.time(1), (dt.time(0), dt.time(1)), dt.timedelta(seconds=10), 'mm:ss', key='Time Range')
         r = st.slider('Random Rate', 0.0, 1.0, 1.0, key='Random Rate')
     if st.button(f'Search {"EgGMAn" if y.size else "Random"}', type='primary'):
