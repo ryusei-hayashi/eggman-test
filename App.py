@@ -181,7 +181,7 @@ if n:
                 q = T[q]
                 z = normal(q['vec'].mean(), r * numpy.stack(q['vec']).std(0))
             o = q[~q['Artist'].isin(i) & ~q['Site'].isin(j) & q['Time'].between(t[0], t[1])] 
-            st.dataframe(o.iloc[norm(numpy.stack(o['vec']) - z, axis=1).argsort()[:99], 1:5].reset_index(drop=True), column_config={'URL': st.column_config.LinkColumn(), 'Time': st.column_config.TimeColumn(format='mm:ss')})
+            st.dataframe(o.iloc[norm(numpy.stack(o['vec']) - z, axis=1).argsort()[:99], :5].reset_index(drop=True), column_config={'URL': st.column_config.LinkColumn(), 'Time': st.column_config.TimeColumn(format='mm:ss')})
             open('log.txt', 'a').write(f'{st.session_state}\n')
         except:
             st.error('No music matches the conditions')
