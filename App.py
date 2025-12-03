@@ -151,21 +151,17 @@ M = model('data/model.pkl')
 T, a, b = table('data/table.pkl')
 
 n = st.text_input('Your Name', key='Your Name')
-
 if n:
     if n == st.secrets.pw:
         st.download_button('Download', open('log.txt', 'r'))
     else:
         st.image('imgs/logo.png')
-        
         st.header('Source Music')
         s = st.segmented_control('Type of Source Music', ('Web Service', 'Direct Link', 'Audio File'), default='Web Service', key='Type of Source Music')
         y = music(s, st.file_uploader('File of Source Music', key='File of Source Music') if 'File' in s else st.text_input('URL of Source Music', key='URL of Source Music'))
-        
         c = st.columns(2, gap='large')
         p = scene(c[0], 'Source Scene')
         q = scene(c[1], 'Target Scene')
-        
         st.header('Target Music')
         with st.popover('Search Option'):
             i = st.multiselect('Ignore Artist', ('ANDY', 'BGMer', 'Nash Music Library', 'Seiko', 'TAZ', 'hitoshi', 'zukisuzuki', 'たう', 'ガレトコ', 'ユーフルカ'), key='Ignore Artist', placeholder='')
