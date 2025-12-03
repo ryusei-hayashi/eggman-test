@@ -152,36 +152,39 @@ T, a, b = table('data/table.pkl')
 
 n = st.text_input('Your Name', key='Your Name')
 
-if n == st.secrets.pw:
-    st.download_button('Download', open('log.txt', 'r'))
-
 if n:
-    st.image('imgs/logo.png')
-    
-    st.header('Source Music')
-    s = st.segmented_control('Type of Source Music', ('Web Service', 'Direct Link', 'Audio File'), default='Web Service', key='Type of Source Music')
-    y = music(s, st.file_uploader('File of Source Music', key='File of Source Music') if 'File' in s else st.text_input('URL of Source Music', key='URL of Source Music'))
-    
-    c = st.columns(2, gap='large')
-    p = scene(c[0], 'Source Scene')
-    q = scene(c[1], 'Target Scene')
-    
-    st.header('Target Music')
-    with st.popover('Search Option'):
-        i = st.multiselect('Ignore Artist', ('ANDY', 'BGMer', 'Nash Music Library', 'Seiko', 'TAZ', 'hitoshi', 'zukisuzuki', 'たう', 'ガレトコ', 'ユーフルカ'), key='Ignore Artist', placeholder='')
-        j = st.multiselect('Ignore Site', ('BGMer', 'BGMusic', 'Nash Music Library', 'PeriTune', 'Senses Circuit', 'zukisuzuki BGM', 'ガレトコ', 'ユーフルカ', '音の園'), key='Ignore Site', placeholder='')
-        t = st.slider('Time Range', dt.time(0), dt.time(1), (dt.time(0), dt.time(1)), dt.timedelta(seconds=10), 'mm:ss', key='Time Range')
-        r = st.slider('Random Rate', 0.0, 1.0, 1.0, key='Random Rate')
-    if st.button(f'Search {"EgGMAn" if y.size else "Random"}', type='primary'):
-        try:
-            if y.size:
-                p, q = T[p & ~q], T[q & ~p]
-                z = a * vec(y, r) - b - core(p['vec']) + core(q['vec'])
-            else:
-                q = T[q]
-                z = normal(q['vec'].mean(), r * numpy.stack(q['vec']).std(0))
-            o = q[~q['Artist'].isin(i) & ~q['Site'].isin(j) & q['Time'].between(t[0], t[1])] 
-            st.dataframe(o.iloc[norm(numpy.stack(o['vec']) - z, axis=1).argsort()[:99], :5].reset_index(drop=True), column_config={'URL': st.column_config.LinkColumn(), 'Time': st.column_config.TimeColumn(format='mm:ss')})
-            open('log.txt', 'a').write(f'{st.session_state}\n')
-        except:
-            st.error('No music matches the conditions')
+    if n == st.secrets.pw:
+        st.download_button('Download', open('log.txt', 'r'))
+    else:
+        st.image('imgs/logo.png')
+        
+        st.header('Source Music')
+        s = st.segmented_control('Type of Source Music', ('Web Service', 'Direct Link', 'Audio File'), default='Web Service', key='Type of Source Music')
+        y = music(s, st.file_uploader('File of Source Music', key='File of Source Music') if 'File' in s else st.text_input('URL of Source Music', key='URL of Source Music'))
+        
+        c = st.columns(2, gap='large')
+        p = scene(c[0], 'Source Scene')
+        q = scene(c[1], 'Target Scene')
+        
+        st.header('Target Music')
+        with st.popover('Search Option'):
+            i = st.multiselect('Ignore Artist', ('ANDY', 'BGMer', 'Nash Music Library', 'Seiko', 'TAZ', 'hitoshi', 'zukisuzuki', 'たう', 'ガレトコ', 'ユーフルカ'), key='Ignore Artist', placeholder='')
+            j = st.multiselect('Ignore Site', ('BGMer', 'BGMusic', 'Nash Music Library', 'PeriTune', 'Senses Circuit', 'zukisuzuki BGM', 'ガレトコ', 'ユーフルカ', '音の園'), key='Ignore Site', placeholder='')
+            t = st.slider('Time Range', dt.time(0), dt.time(1), (dt.time(0), dt.time(1)), dt.timedelta(seconds=10), 'mm:ss', key='Time Range')
+            r = st.slider('Random Rate', 0.0, 1.0, 1.0, key='Random Rate')
+        if st.button(f'Search {"EgGMAn" if y.size else "Random"}', type='primary'):
+            try:
+                if y.size:
+                    p, q = T[p & ~q], T[q & ~p]
+                    z = a * vec(y, r) - b - core(p['vec']) + core(q['vec'])
+                else:
+                    q = T[q]
+                    z = normal(q['vec'].mean(), r * numpy.stack(q['vec']).std(0))
+                o = q[~q['Artist'].isin(i) & ~q['Site'].isin(j) & q['Time'].between(t[0], t[1])] 
+                st.dataframe(o.iloc[norm(numpy.stack(o['vec']) - z, axis=1).argsort()[:99], :5].reset_index(drop=True), column_config={'URL': st.column_config.LinkColumn(), 'Time': st.column_config.TimeColumn(format='mm:ss')})
+                open('log.txt', 'a').write(f'{st.session_state}\n')
+            except:
+                st.error('No music matches the conditions')
+else:
+    with st.container():
+        st.markdown(aiueo)
