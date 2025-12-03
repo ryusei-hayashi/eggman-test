@@ -187,4 +187,8 @@ if n:
                 st.error('No music matches the conditions')
 else:
     with st.container():
-        st.markdown(aiueo)
+        st.header('注意事項')
+        st.markdown('- 下記の協力同意文に同意いただける場合は名前を入力してください\n- 名前を入力するとEgGMAnが起動します\n- 入力する名前は\n- 入力した名前を覚えておいてください')
+    with st.container():
+        st.header('協力同意文')
+        st.markdown('- 下記の協力同意文に同意いただける場合は名前を入力してください\n- 名前を入力するとEgGMAnが起動します\n- 入力する名前は\n- 入力した名前を覚えておいてください')
